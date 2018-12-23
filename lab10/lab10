@@ -1,0 +1,39 @@
+Kevin Wong
+kmw396 - 14240214
+December 10, 2018
+Lab 10: Performance
+
+Q1
+  n   |  T(n)  | f(n) = n | f(n) = n^2 | f(n)=n^3 
+---------------------------------------------------
+1000  | 0.197  | .000197  | 1.97E-7    | 1.97E-10
+10000 | 2.624  | .000262  | 2.62E-8    | 2.62E-12
+20000 | 6.052  | .000303  | 1.52E-8    | 7.58E-13
+30000 | 9.761  | .000325  | 1.08E-8    | 3.61E-13
+40000 | 13.732 | .000343  | 8.58E-9    | 2.14E-13
+50000 | 17.734 | .000355  | 7.10E-9    | 1.42E-13
+60000 | 21.944 | .000366  | 6.10E-9    | 1.02E-13
+70000 | 26.761 | .000382  | 5.46E-9    | 7.80E-14
+80000 | 31.636 | .000395  | 4.94E-9    | 6.17E-14
+
+T(n) : T(n) increasing to infinity and bound by a constant.
+f(n) : n increasing to infinity and bound by lower bound
+f(n) : n^2 decreasing towards zero/non-zero constant and is bound upper bound
+f(n) : n^3 decreasing towards zero and is bound upper bound
+
+Q2)
+  n   |    T(n)   | f(n)=n  | f(n)=n^2 | f(n)=n^3
+--------------------------------------------------
+1000  | 3425457   | 3425.46 | 3.42546  | 3.43E-03 
+10000 | 45721062  | 4572.11 | 0.45721  | 4.57E-05
+20000 | 98107982  | 4905.40 | 0.24527  | 1.23E-05
+30000 | 153522280 | 5117.41 | 0.17058  | 5.69E-06
+40000 | 210173451 | 5254.34 | 0.13156  | 3.28E-06
+50000 | 265180908 | 5303.62 | 0.10607  | 2.12E-06
+60000 | 319847373 | 5330.79 | 0.08885  | 1.48E-06
+
+T(n) : T(n) increasing towards non-zero constant and bound by constant
+f(n) : n increasing to infinity and bound below a line
+f(n) : n^2 decreasing towards zero/non-zero constant
+f(n) : n^3 decreasing towards zero and bound by upper bound
+

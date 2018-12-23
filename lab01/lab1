@@ -1,0 +1,47 @@
+Q2: I see permissions, size, date, and other metadata about the files in the directory lab01
+
+total 48
+-rw-r--r--  1 kmw396 kmw396  8060 Sep 28 12:51 funny
+-rwxr-xr-x  1 kmw396 kmw396   240 Sep 28 12:51 hello.bash
+-rw-r--r--+ 1 kmw396 kmw396 33183 Sep 28 12:49 vi_lab
+
+Q3: If you enter permissions chmod 644, you're giving yourself Read & Write permissions, group gets read permissions, and world gets read permissions
+OWNER: READ and WRITE
+GROUP: READ
+WORLD: READ
+
+Q4: If you enter chmod 755, you're giving yourself Read, Write, and Execute permissions, group Read and Execute, and world Read and Execute permissions.
+OWNER: READ, WRITE, EXECUTE
+GROUP: READ AND EXECUTE
+WORLD: READ AND EXECUTE
+
+Q5: Yes, I can read the file: funny
+
+Q6: Yes, I can read the file; hello.bash
+
+Q7: No, I cannot execute hello.bas
+
+Q8: You can change permissions of the file with: chmod 744 hello.bash and you can do chmod u+x hello.bash
+
+Q9: You cannot make changes to a file that only has read permissions 
+
+Q10: 
+ls *
+annoy     funny       itemList        lab1           UnitTestingPhase
+annoy.cc  hello.bash  itemList-2cols  TelecomTruths  vi_lab
+
+ls a*
+annoy  annoy.cc
+
+ls *m*
+itemList  itemList-2cols  TelecomTruths
+
+ls anno?
+annoy
+
+ls annoy? 
+ls: cannot access 'annoy?': No such file or directory
+
+Q11: 
+Instead of creating a file with "a space" in the name, it created a file with just the name "a" ignoring the word "space" 
+

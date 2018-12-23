@@ -1,0 +1,20 @@
+Kevin Wong
+kmw396 - 14240214
+November 19, 2018
+Lab 8: Interfaces and Makefiles
+
+1)
+	i) Program Implementation is hidden from the user so the system can be changed without affecting the user
+	ii) These are non-overlapping functions that do one thing
+	iii) An interface does what it's supposed to do. The user shouldn't be suprised
+	iv) Programs should be consistent in their implementation with similar interfaces
+
+2) There are empty fields, commas within quotes, and escaped quotes
+
+3) Commas within quotes and quotes within quotes are handled better
+
+4) Empty fields are not handled properly. You also can't parse two files at the same time
+
+5) The C++ implemnetation does not solve the issues and empty fields still aren't handled properly
+
+6) Yes, the C++ implementation adheres to good i/f.

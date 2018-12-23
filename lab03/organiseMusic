@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in *.mp3; do
+artist="$(echo -e "${i}" | cut -d'-' -f 1 | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+song="$(echo -e "${i}" | cut -d'-' -f 2 | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+mkdir -p "$artist"
+mv "$i" "$artist//$song"
+done

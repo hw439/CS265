@@ -1,0 +1,24 @@
+#!/bin/bash
+#Kevin Wong
+#kmw396 - 14240214
+#November 1, 2018
+#Assignment 1, Problem 3: Take cmd-line args for YYYY MM DD and return messages from that day
+
+#ARCHIVE="/home/kmw396/CS265/assn1/DrMathArchive/*" #for testing purposes
+
+#arg checking for date format
+if [ $# != 3 ]; then
+	echo "Arguments Invalid. Please enter a date in format: YYYY MM DD" && exit
+fi
+
+#format date used by messages: MM DD YYYY
+date="$2/$3/$1" #formatted date used by messages
+
+#find and store messages by date from ARCHIVE
+messages=$(grep -rl $date $ARCHIVE)
+
+#print items found in messages array
+for item in $messages; do
+	file=${item##*/} #show file, not full filename
+	echo $file
+done

@@ -1,0 +1,39 @@
+Kevin Wong
+kmw396 - 14240214
+November 5, 2018
+Lab 06: Data Structures
+
+1) 
+	i) List: A list is a sequence of elements linked together with a pointer.
+	ii) Stack: A stack allows elements to be inserted and removed using the last in, first out method
+	iii) Queue: A queue allows elements to be inserted and removed using the first in, first out method
+	iv) Dictionary: A dictionary is a data structure that holds elements associated with a key.
+
+2) In Binary Search, we will use log2(n) in order to compare elements. We divide by two, log2(n) times before we get our desired element.
+
+3) A linear search will check each every element until a comparsion is reached, n times.
+
+4) You would best use linear search when you only want to check a unsorted list once.
+
+5) 
+*84* 37 93 82 98 27 63 73 93 27 75 55 45 8
+*37* 82 27 63 73 27 75 55 45 8 *84* 93 98 93 
+27 27 8 *37* 82 63 73 75 55 45 84 *93* 98 93
+*27* 27 8 37 *82* 63 73 75 55 45 84 93 *98* 93
+8 *27* 27 37 63 73 75 55 45 *82* 84 93 93 *98*
+8 27 27 37 *63* 73 75 77 45 82 84 93 93 98
+8 27 27 37 45 *63* 73 75 77 82 84 93 93 98
+8 27 27 37 45 63 73 *75* 77 82 84 93 93 98
+8 27 27 37 45 63 73 75 77 82 84 93 93 98
+
+6) 3 24 06
+
+7) [13, [28, [24, [3, none]]]]
+
+8) The difference in the output is caused by pointer s which is being reinitalized and does not directly interact at the buffer which thus does not change the contents of the buffer. 
+
+9)
+Hash     Entries:
+3        [Cos,86],[Bob,38]
+4        [Jaga,24],[Kate,28],[Nash,11],[Vera,99]
+5        [Jesse,78]

@@ -1,0 +1,29 @@
+#!/bin/bash
+#Kevin Wong
+#kmw396 - 14240214
+#November 1, 2018
+#Assignment 1, Prob 4: Print E-Mail Hostname of Messages
+
+#ARCHIVE="/home/kmw396/CS265/assn1/DrMathArchive/*" #for testing purposes
+
+#find all emails in ARCHIVE, store in temp file
+grep -oErh "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b" $ARCHIVE/* >> tempa
+
+#remove everything before hostname
+while read email; do
+	ext="${email##*@}"
+	echo $ext >> tempb
+done < tempa
+
+#sort in smallest to largest and remove duplicates (keep unique hostnames) 
+sort --ignore-case tempb | uniq -cdi | sort -nr -o tempb
+
+#print hostnames and number of messages
+awk '{print $2, $1}' tempb
+
+#total hostnames
+total=$(wc -l tempb | cut -f1 -d' ')
+echo "Total $total"
+
+#delete temp files
+rm tempa && rm tempb 

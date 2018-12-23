@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+######
+#Kevin Wong
+#kmw396 - 14240214
+#December 4, 2018
+#Assignment 3: Command-line utility to manage bank accounts
+
+import sys, os, random, time, math
+
+#### FOR TESTING PURPOSES #####
+#os.environ['ACCT_LIST'] = 'sample.db'
+                
+def createAccount(isValid):
+#### CREATE ACCOUNT FUNCTION: Uses the random function to create unique account number. Writes account to database ####
+    
+    #user input, date generation, userID storage
+    name = input('\nEnter name: ')
+    date = (time.strftime('%y.%m.%d'))
+    
+    #generates unique userID
+    newUserID = random.randint(1000,9999)
+    
+    #displays new userID created to user
+    print('%s %s: created' % (name, newUserID))
+    
+    #writes new account into database
+    db = open(os.environ['ACCT_LIST'], 'a')
+    db.write('\n%s:%s:%s:%s:%s' % (newUserID, name, date, 'D', 0))
+    db.close()
+
+def getAccount(idNumber, data):
+#### HELPER FUNCTION: Returns data on all accounts ####
+
+    accountInfo = []
+    
+    #parses through database and retrieves data for all accounts
+    for line in data:
+        acctInfo = line.split(':')
+        accountID = int(acctInfo[0])
+        
+        if idNumber == accountID:
+            accountInfo.append(line)
+    
+    return accountInfo
+
+def getAccountInfo(accountInfo, idNumber):
+#### ACCOUNT INFO FUNCTION: Returns information and balance of selected account ####
+    
+    balance = 0
+    
+    #parse through selected account's data, calculate total balance.
+    for history in accountInfo:
+        acctInfo = history.split(':')
+        name = acctInfo[1]
+        
+        if acctInfo[3].lower() == 'd':
+            balance += float(acctInfo[4])
+        else:
+            balance -= float(acctInfo[4])
+            
+    print('account #: %s' % idNumber)
+    print('name: %s' % name)
+    
+    #prints only 2 decimals and correct negative balance format
+    if balance >= 0:
+        print('balance: $%0.2f' % balance )
+    else:
+        print('balance: -$%0.2f' % abs(balance))
+
+def getHistory(accountInfo, idNumber):
+#### ACCOUNT HISTORY FUNCTION: Returns transaction history of selected account ####
+
+    #parse through selected acocunt's data
+    for history in accountInfo:
+        acctInfo = history.split(':')
+        
+    #print fromatted data of selected user
+        if acctInfo[3].lower() == 'd':
+            print('deposit', acctInfo[2], float(acctInfo[4]))
+        else:
+            print('withdrawl', acctInfo[2], float(acctInfo[4]))
+    
+def insertTransaction(accountInfo, idNumber):
+#### INSERT TRANSACTIONS FUNCTION: Writes transaction data to selected user ####
+
+    #parses through selected account's data
+    for history in accountInfo:
+        acctInfo = history.split(':')
+        name = acctInfo[1]
+    
+    #formats date and input for withdrawl or deposit. program exits if input is invalid
+    date = (time.strftime("%y.%m.%d"))
+    transaction = input('W)ithdrawl or D)eposit: ')
+    if transaction.upper() == 'W':
+        transaction = 'W'
+    elif transaction.upper() == 'D':
+        transaction = 'D'
+    else:
+        print('Invalid input. Exiting')
+        exit()
+        
+    amount = input('Amount: ')
+    
+    #writes transactions to temp file
+    db = open(os.environ['ACCT_LIST'], 'a')
+    db.write('\n%s:%s:%s:%s:%s' % (idNumber, name, date, transaction, amount))
+    db.close()
+    
+    print("Transaction Posted.")
+    
+if __name__ == '__main__':
+    
+    #### Argument Checking ####
+    # if no arguments supplied, program will exit
+    if len(sys.argv) < 2:
+        print("No arguments passed. Exiting")
+        exit()
+    
+    arguments = ['-t', '-h', '-i']
+    
+    # if arguments don't match list above, program will exit
+    if sys.argv[1] not in arguments:
+        print('accounts: illegal operation', sys.argv[1])
+        print('usage: accounts [-iht] ...')
+    
+    #read from variable ACCT_LIST
+    accountFile = open(os.environ['ACCT_LIST'], 'r')
+    data = accountFile.read().splitlines()
+    accountFile.close()
+    
+    #### User Interface ####
+    arg = sys.argv[1]
+    
+    #display title based on user arg choice
+    valid = True
+    while valid:
+        if arg == '-i':
+            print("\nInfo")
+        elif arg == '-h':
+            print("\nHistory")
+        elif arg == '-t':
+            print("\nTransaction")
+        
+        print("----")
+        
+        count = 1
+        isValid=[]
+        
+        #parse database file
+        for line in data:
+            acctData = line.split(':')
+            acctID = int(acctData[0])
+            acctName = acctData[1]
+            
+            acctInfo = [acctName, acctID]
+            
+            if acctInfo not in isValid:
+                isValid.append(acctInfo)
+            
+        #sorts account list in ascending order 
+        isValid = sorted(isValid)
+        
+        #display accounts in list form
+        for account in isValid:
+            print('%s) %s %s' % (count, account[0], account[1]))
+            count += 1
+        
+        #if arg choice is -t, adds "c)reate new account" option
+        if arg == '-t':
+            print('c)reate new account')
+        
+        #prints the "q)uit" option and allows user input
+        print("q)uit")
+        userInput = input("Enter choice => ")
+        
+        #parses through user selections
+        if userInput == 'q':
+            exit()
+        elif userInput == 'c' and arg =='-t':
+            createAccount(isValid)
+        else:
+            try:
+                idNumber = isValid[int(userInput) -1][1]
+            except (IndexError, ValueError):
+                print("Invalid Choice: Exiting")
+                exit()
+        
+        ##### arg input #####
+        accountInfo = getAccount(idNumber, data)
+            
+        if arg == '-i':
+            getAccountInfo(accountInfo, idNumber)
+        elif arg == '-h':
+            getHistory(accountInfo, idNumber)
+        elif arg == '-t':
+            insertTransaction(accountInfo, idNumber)

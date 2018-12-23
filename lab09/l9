@@ -1,0 +1,25 @@
+Kevin Wong
+kmw396 - 14240214
+December 03, 2018
+Lab 9 - Debugging and Testing
+
+1) After compling and running bug3, it returned "Segmentation fault (core dumped). There is also a new file called bug3 which is executable and it modified a file called core.
+
+2) The functions that bombed:
+#1  0x00000000004009ad in inTable ()
+#2  0x0000000000400920 in main ()
+
+3)
+	c. Segmentation fault (core dumped)
+		Fix:
+		/* Increment numlines after pointer is returned */
+		st[ numLines ] = strdup( buff );
+		++numLines;
+	e. Segmentation fault (core dumped)
+		This error is caused by illegal memory location use. You can fix this by editing your code to not use illegal memory locations. 
+	f. undefined reference to 'main'
+	   Fixed by inlcuding brackets for the for statement
+
+4) The compiler only catces syntax errors, not user input errors. The stack outputs that the same value is repeated.
+
+5) Using qsort and passing strings through the function will cause an error because qsort can't differeniate between strings or intergers.

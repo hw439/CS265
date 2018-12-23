@@ -1,0 +1,26 @@
+#!/bin/bash
+#Kevin Wong
+#kmw396 - 14240214
+#11/01/2018
+#Assignment 1, Problem 2: Messages in Longest Thread
+
+#ARCHIVE="/home/kmw396/CS265/assn1/DrMathArchive"
+
+#global variables
+largestThread=0
+largestFile=""
+
+#goes into directory, find files inside directories, pull _XX from name, finds threads then compare.
+for directory in $ARCHIVE/*; do
+	for file in $directory/*; do
+		fileName="${file%_*}"
+		numThread=$(grep -r "$fileName" | wc -l)
+		
+		if [ $numThread -gt $largestThread ]; then
+			largestThread=$numThread
+			largestFile=$fileName
+		fi
+	done
+done
+
+echo $largestThread $largestFile

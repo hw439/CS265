@@ -1,0 +1,14 @@
+#!/bin/bash
+#Kevin Wong
+#kmw396 - 14240214
+#11/01/2018
+#Assignment 1, Problem 1: Determine the number of directories containing problems.
+
+#ARCHIVE="/home/kmw396/CS265/assn1/DrMathArchive/*" #for testing purposes
+
+#list directory, pipe, word count to get amount of files
+dir=$(ls -d $ARCHIVE/* | wc -l)
+
+#list directory, find all files that start with prob, word count to get amount of files
+msg=$(ls -Rl $ARCHIVE/* | egrep -n "prob*" | wc -l)
+echo $dir $msg

@@ -1,0 +1,66 @@
+Kevin Wong
+kmw396 - 14240214
+November 12, 2018
+Lab 7 - Design and Implementation
+
+1) i.) add() - adds a new prefix to a table and updates the prefix
+	ii.) addSuffix() - adds a new suffix to the hash table
+
+2) i.) lookup() - searches for a prefix. If create argument is given a 1, a prefix is created. It also returns a pointer to the current prefix or NULL if it doesn't exist.
+	ii.) lookup() is called by add() and generate().
+
+3)
+	Prefix         | Suffix
+	-------------------------
+	(null)  (null) | It's
+	(null)  It's   | a
+	It's    a      | new
+	a       new    | dawn
+	new     dawn   | (null)
+	-------------------------
+
+	a) "It's" - 3 pointers 
+	b) "a" - 3 pointers
+	c) "new" - 3 pointers
+	d) "dawn" - 2 pointers
+
+4)
+Each string is allocated a specific amount of memory it needs.
+
+5)
+You have to free memory so it can be reallocated to other programs
+
+6)
+void cleanup(State *statetab) {
+	while(statetab != NULL) {
+		free(statetab);
+		statetab = statetab->next;
+	}
+}
+
+7)
+Function works fine.
+
+8)
+You could check if the value of the pointer is the the same after freeing the value to check if the memory location is actually free
+
+9)
+The prefixes are stored in a double ended queue. Storing prefixes in a queue rather than a vector allows you to pop the first element and add a new element at the end.
+
+10) Map (Hashmap)
+
+11) A vector of suffixes
+
+12) C++ implementation is better since you can use the standard library which has a lot of built-in datatypes. 
+
+13) C++ drawbacks include less control over implementation because of built-in datatypes and increase of memeory usage which makes the code slightly less efficent/slower
+
+14) Tuples
+
+15) Dictionary
+
+16) List
+
+17) Variables in Python are objects and there are many built-in functions that makes writing code easier to write.
+
+18) Python doesn't use pointers and there is no memory management control that C++ has since everything is stored in a list, dictionary, or tuple.
